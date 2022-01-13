@@ -37,7 +37,7 @@ jobs:
        uses: docker/build-push-action@v2
        with:
          push: false
-         tags: user/app:latest
+         tags: test-image:latest
          
      - name: nn
        uses: addnab/docker-run-action@v3
