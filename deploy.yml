@@ -38,15 +38,15 @@
       
     - name: register user
       command: uplink import client /bin/session/accessgrant.txt
-      
-    - name: register contact
-      command: uplink import "{{ name }}" /bin/session/contact.txt
+     
       
     - name: read contact messages
       command: uplink ls sj://messages/"{{ contact_name }}"  --access client
-
+    - name: register contact
+      command: uplink import "{{ name }}" /bin/session/contact.txt
+      
     - name: send contact messages
-      command: uplink mv sj://messages//cakes/message.yaml sj://messages//"{{ name }}"/new-message.yaml --access "{{ name }}"
+      command: uplink mv sj://cakes/message.yaml sj://messages/"{{ name }}"/new-message.yaml --access "{{ name }}"
 
     - name: out
       command: echo "done"
