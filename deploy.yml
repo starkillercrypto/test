@@ -40,7 +40,7 @@
       command: uplink import client /bin/session/accessgrant.txt
       
     - name: register contact
-      command: uplink import "{{ name }}" /bin/session/accessgrant.txt
+      command: uplink import "{{ name }}" /bin/session/contact.txt
       
     - name: read contact messages
       command: uplink ls sj://messages/"{{ contact_name }}"  --access client
