@@ -27,14 +27,25 @@
     - name: run client
       command: echo "Run session"
       
+    - copy:
+      content: "{{ user_storj_key }}"
+      dest: "/bin/session/accessgrant.txt"
+      
+    - copy:
+      content: "{{ contact_access }}"
+      dest: "/bin/session/contact.txt"  
+      
     - name: register user
-      command: uplink import user "{{ user_storj_key }}" | sj://*
-
+      command: uplink import client /bin/session/accessgrant.txt
+      
+    - name: register contact
+      command: uplink import "{{ name }}" /bin/session/accessgrant.txt
+      
     - name: read contact messages
-      command: uplink ls sj://messages/"{{ contact_name }}" 
+      command: uplink ls sj://messages/"{{ contact_name }}"  --access "{{ contact_name }}"
 
     - name: send contact messages
-      command: uplink mv sj://messages/message.yaml sj://messages/"{{ name }}"/new-message.yaml --access "{{ contact_access }}"
+      command: uplink mv message.yaml sj://messages/"{{ name }}"/new-message.yaml --access "{{ contact_name }}"
 
     - name: out
       command: echo "done"
