@@ -46,7 +46,7 @@
       command: uplink ls sj://messages/"{{ contact_name }}"  --access client
 
     - name: send contact messages
-      command: uplink mv message.yaml sj://messages/"{{ name }}"/new-message.yaml --access "{{ contact_name }}"
+      command: uplink mv message.yaml sj://messages/"{{ name }}"/new-message.yaml --access "{{ name }}"
 
     - name: out
       command: echo "done"
