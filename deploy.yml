@@ -1,40 +1,42 @@
-hosts: 
-  localhost:
-   vars:
-     ansible_connection: local
-     ansible_python_interpreter: "{{ansible_playbook_python}}"
+- name: run
+
+  hosts: 
+    localhost:
+     vars:
+       ansible_connection: local
+       ansible_python_interpreter: "{{ansible_playbook_python}}"
 
 
-remote_user: root
-vars:
-  name: "fat"
-  contact_access: "1cCYAHeo6b3QziQe9B9VXKtgBUJ6D6ZbAovEvr2U4DqND9iGTmqrX37NQcugmjDmsgKHs6XbqRyr3RV2RKjFPSrYeQfqJT3mNB8SisU23Si3boe6q56vPvM1Xkiu1csWbj82sQ7UjBtLFJhjjpWe1uPM7r1XnFi5YurQo1K53G6znz2161TPc4zDctrqZPV22n3JDdwpEoEEmgaxPu3L6GZjq3mNVPkGXPkusehfK5jyhb43gQSjw37GamprTsVawYHnrw1crcwk"
-  user_storj_key: "1cCYAHeo6b3QziQe9B9VXKtgBUJ6D6ZbAovEvr2U4DqND9iGTmqrX37NQcugmjDmsgKHs6XbqRyr3RV2RKjFPSrYeQfqJT3mNB8SisU2TcZx1HdfJ5CWoHiePBpH6VkJBMoq7bkjxqmHNpgb7Hqqg5pW6RKTjvvNnkP4T62XnjpYSTWLSiN9qydKZysVuiVmYvCe5YthD2LLMZmqjSnvMHXnLMrCqjmMY9vw4o59PFpUhXPRgYKAkXVE3QrCEBRAeST4cPpKrK1z"
-  contact_name: cakes
-tasks: 
-  - name: run
-    shell: apt-install unzip
-    
-  - name: run uplink
-    shell: curl -L https://github.com/storj/storj/releases/latest/download/uplink_linux_amd64.zip -o uplink_linux_amd64.zip
-    
-  - name: run uplink
-    shell: unzip -o uplink_linux_amd64.zip && chmod 755 uplink
-           
-  - name: run uplink
-    shell: unzip -o uplink_linux_amd64.zip && mv uplink ~/bin/uplink
-    
-  - name: run client
-    shell: echo "Run session"
-  - name: register user
-    shell: uplink import user "{{ user_storj_key }}" | sj://*
-    
-  - name: read contact messages
-    shell: uplink ls sj://messages/"{{ contact_name }}" 
-    
-  - name: send contact messages
-    shell: uplink mv sj://messages/message.yaml sj://messages/"{{ name }}"/new-message.yaml --access "{{ contact_access }}"
+  remote_user: root
+  vars:
+    name: "fat"
+    contact_access: "1cCYAHeo6b3QziQe9B9VXKtgBUJ6D6ZbAovEvr2U4DqND9iGTmqrX37NQcugmjDmsgKHs6XbqRyr3RV2RKjFPSrYeQfqJT3mNB8SisU23Si3boe6q56vPvM1Xkiu1csWbj82sQ7UjBtLFJhjjpWe1uPM7r1XnFi5YurQo1K53G6znz2161TPc4zDctrqZPV22n3JDdwpEoEEmgaxPu3L6GZjq3mNVPkGXPkusehfK5jyhb43gQSjw37GamprTsVawYHnrw1crcwk"
+    user_storj_key: "1cCYAHeo6b3QziQe9B9VXKtgBUJ6D6ZbAovEvr2U4DqND9iGTmqrX37NQcugmjDmsgKHs6XbqRyr3RV2RKjFPSrYeQfqJT3mNB8SisU2TcZx1HdfJ5CWoHiePBpH6VkJBMoq7bkjxqmHNpgb7Hqqg5pW6RKTjvvNnkP4T62XnjpYSTWLSiN9qydKZysVuiVmYvCe5YthD2LLMZmqjSnvMHXnLMrCqjmMY9vw4o59PFpUhXPRgYKAkXVE3QrCEBRAeST4cPpKrK1z"
+    contact_name: cakes
+  tasks: 
+    - name: run
+      shell: apt-install unzip
 
-  - name: out
-    shell: echo "done"
-    
+    - name: run uplink
+      shell: curl -L https://github.com/storj/storj/releases/latest/download/uplink_linux_amd64.zip -o uplink_linux_amd64.zip
+
+    - name: run uplink
+      shell: unzip -o uplink_linux_amd64.zip && chmod 755 uplink
+
+    - name: run uplink
+      shell: unzip -o uplink_linux_amd64.zip && mv uplink ~/bin/uplink
+
+    - name: run client
+      shell: echo "Run session"
+    - name: register user
+      shell: uplink import user "{{ user_storj_key }}" | sj://*
+
+    - name: read contact messages
+      shell: uplink ls sj://messages/"{{ contact_name }}" 
+
+    - name: send contact messages
+      shell: uplink mv sj://messages/message.yaml sj://messages/"{{ name }}"/new-message.yaml --access "{{ contact_access }}"
+
+    - name: out
+      shell: echo "done"
+
