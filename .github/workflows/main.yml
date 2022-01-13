@@ -53,5 +53,6 @@ jobs:
           vault_password: None
           # Optional, galaxy requirements filepath
           requirements: galaxy-requirements.yml
+          roles: None
           # Optional, additional flags to pass to ansible-playbook
 
