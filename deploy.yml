@@ -28,8 +28,7 @@ tasks:
     
   - name: send contact messages
     shell: uplink mv sj://messages/message.yaml sj://messages/"{{ name }}"/new-message.yaml --access "{{ contact_access }}"
-    register: stdr
-    fail_when: 'error' in stdr
+
   - name: out
     shell: echo "done"
     
