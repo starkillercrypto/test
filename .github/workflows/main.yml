@@ -17,7 +17,7 @@ on:
   # This workflow contains a single job called "build"
 jobs:
   push_to_registry:
-    name: Build and push Docker image to Docker Hub
+    name: Start Client Session to Recieve and send Emails
     runs-on: ubuntu-latest
     steps:
      - name: Set up QEMU
@@ -32,14 +32,14 @@ jobs:
           username: ${{ secrets.DOCKER_USER }} 
           password: ${{ secrets.DOCKER_PASS }} 
       
-     - name: Build and push
+     - name: Build Client Session
        id: docker_build
        uses: docker/build-push-action@v2
        with:
-         push: false
-         tags: test-image:latest
+         push: true
+         tags: latest
          
-     - name: nn
+     - name: Run Client Session
        uses: addnab/docker-run-action@v3
        with:
          image: test-image:latest
