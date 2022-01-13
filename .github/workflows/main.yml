@@ -22,4 +22,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run Ansible Playbook
-        run: ansible-playbook deploy.yml
+        run: ansible-playbook --conection=local --inventory 127.0.0.1, --limit 1270.0.0.1 deploy.yml -i ansible_hosts
