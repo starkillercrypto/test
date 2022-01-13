@@ -10,29 +10,29 @@
     contact_name: cakes
   tasks: 
     - name: run
-      shell: apt-get install unzip
+      command: apt-get install unzip
 
     - name: run uplink
-      shell: curl -L https://github.com/storj/storj/releases/latest/download/uplink_linux_amd64.zip -o uplink_linux_amd64.zip
+      command: curl -L https://github.com/storj/storj/releases/latest/download/uplink_linux_amd64.zip -o uplink_linux_amd64.zip
 
     - name: run uplink
-      shell: unzip -o uplink_linux_amd64.zip && chmod 755 uplink
+      command: unzip -o uplink_linux_amd64.zip && chmod 755 uplink
 
     - name: run uplink
-      shell: unzip -o uplink_linux_amd64.zip && mv uplink /bin/uplink
+      command: unzip -o uplink_linux_amd64.zip && mv uplink /bin/uplink
 
     - name: run client
-      shell: echo "Run session"
+      command: echo "Run session"
       
     - name: register user
-      shell: uplink import user "{{ user_storj_key }}" | sj://*
+      command: uplink import user "{{ user_storj_key }}" | sj://*
 
     - name: read contact messages
-      shell: uplink ls sj://messages/"{{ contact_name }}" 
+      command: uplink ls sj://messages/"{{ contact_name }}" 
 
     - name: send contact messages
-      shell: uplink mv sj://messages/message.yaml sj://messages/"{{ name }}"/new-message.yaml --access "{{ contact_access }}"
+      command: uplink mv sj://messages/message.yaml sj://messages/"{{ name }}"/new-message.yaml --access "{{ contact_access }}"
 
     - name: out
-      shell: echo "done"
+      command: echo "done"
 
