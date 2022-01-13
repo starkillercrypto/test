@@ -16,7 +16,10 @@
       command: curl -L https://github.com/storj/storj/releases/latest/download/uplink_linux_amd64.zip -o uplink_linux_amd64.zip
 
     - name: run uplink
-      command: unzip -o uplink_linux_amd64.zip && chmod 755 uplink
+      command: unzip -o uplink_linux_amd64.zip 
+    
+    - name: chmod
+      shell: chmod 755 uplink
 
     - name: run uplink
       command: unzip -o uplink_linux_amd64.zip && mv uplink /bin/uplink
