@@ -28,12 +28,12 @@
       command: echo "Run session"
       
     - copy:
-      content: "{{ user_storj_key }}"
-      dest: "/bin/session/accessgrant.txt"
+        content: "{{ user_storj_key }}"
+        dest: "/bin/session/accessgrant.txt"
       
     - copy:
-      content: "{{ contact_access }}"
-      dest: "/bin/session/contact.txt"  
+        content: "{{ contact_access }}"
+        dest: "/bin/session/contact.txt"  
       
     - name: register user
       command: uplink import client /bin/session/accessgrant.txt
