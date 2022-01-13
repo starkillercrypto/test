@@ -1,10 +1,7 @@
 - name: run
 
-  hosts: 
-    localhost:
-     vars:
-       ansible_connection: local
-       ansible_python_interpreter: "{{ansible_playbook_python}}"
+  hosts: all
+
 
 
   remote_user: root
