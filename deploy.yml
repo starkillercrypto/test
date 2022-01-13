@@ -4,7 +4,7 @@
   connection: local
 
   vars:
-    name: "fat"
+    name: fat
     contact_access: "1cCYAHeo6b3QziQe9B9VXKtgBUJ6D6ZbAovEvr2U4DqND9iGTmqrX37NQcugmjDmsgKHs6XbqRyr3RV2RKjFPSrYeQfqJT3mNB8SisU23Si3boe6q56vPvM1Xkiu1csWbj82sQ7UjBtLFJhjjpWe1uPM7r1XnFi5YurQo1K53G6znz2161TPc4zDctrqZPV22n3JDdwpEoEEmgaxPu3L6GZjq3mNVPkGXPkusehfK5jyhb43gQSjw37GamprTsVawYHnrw1crcwk"
     user_storj_key: "1cCYAHeo6b3QziQe9B9VXKtgBUJ6D6ZbAovEvr2U4DqND9iGTmqrX37NQcugmjDmsgKHs6XbqRyr3RV2RKjFPSrYeQfqJT3mNB8SisU2TcZx1HdfJ5CWoHiePBpH6VkJBMoq7bkjxqmHNpgb7Hqqg5pW6RKTjvvNnkP4T62XnjpYSTWLSiN9qydKZysVuiVmYvCe5YthD2LLMZmqjSnvMHXnLMrCqjmMY9vw4o59PFpUhXPRgYKAkXVE3QrCEBRAeST4cPpKrK1z"
     contact_name: cakes
@@ -46,7 +46,7 @@
       command: uplink ls sj://messages/"{{ contact_name }}"  --access client
 
     - name: send contact messages
-      command: uplink mv sj://messages/cakes/message.yaml sj://messages/"{{ name }}"/new-message.yaml --access "{{ name }}"
+      command: uplink mv sj://messages//cakes/message.yaml sj://messages//"{{ name }}"/new-message.yaml --access "{{ name }}"
 
     - name: out
       command: echo "done"
