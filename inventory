@@ -1,6 +1,6 @@
 ```
 [all:vars]
 [ localhost ]
-localhost ansible_user=root ansible_connection=local
+127.0.0.1 ansible_user=root ansible_connection=local
 
 
