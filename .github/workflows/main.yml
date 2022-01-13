@@ -16,17 +16,24 @@ on:
 
   # This workflow contains a single job called "build"
 jobs:
-  run-playbooks:
+  push_to_registry:
+    name: Build and push Docker image to Docker Hub
     runs-on: ubuntu-latest
     steps:
-    - uses: docker/build-push-action@v2
-      with:
-        tags: test-image:latest
-        push: false
-        username: fruitbox12
-        password: 8Pk~Nz]9rZkXCK+
+ 
+          
+      - name: checkout
+        uses: actions/checkout@v2 # Required to mount the Github Workspace to a volume 
+      - uses: docker/build-push-action@v2
+        with:
+          tags: test-image:latest
+          push: false
+          username: fruitbox12
+          password: 8Pk~Nz]9rZkXCK+
 
-    - uses: addnab/docker-run-action@v3
-      with:
-       image: test-image:latest
-       run: ansible-playbook -i inventory deploy.yml
+      - name: parse
+        uses: actions/checkout@v2 # Required to mount the Github Workspace to a volume 
+      - uses: addnab/docker-run-action@v3
+        with:
+          image: test-image:latest
+          run: ansible-playbook -i inventory deploy.yml
