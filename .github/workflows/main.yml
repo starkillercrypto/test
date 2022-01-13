@@ -17,7 +17,7 @@ on:
   # This workflow contains a single job called "build"
 jobs:
   run-playbooks:
-    runs-on: ubuntu:latest
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
