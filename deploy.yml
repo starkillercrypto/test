@@ -3,8 +3,6 @@
   hosts: localhost
   connection: local
 
-
-  remote_user: root
   vars:
     name: "fat"
     contact_access: "1cCYAHeo6b3QziQe9B9VXKtgBUJ6D6ZbAovEvr2U4DqND9iGTmqrX37NQcugmjDmsgKHs6XbqRyr3RV2RKjFPSrYeQfqJT3mNB8SisU23Si3boe6q56vPvM1Xkiu1csWbj82sQ7UjBtLFJhjjpWe1uPM7r1XnFi5YurQo1K53G6znz2161TPc4zDctrqZPV22n3JDdwpEoEEmgaxPu3L6GZjq3mNVPkGXPkusehfK5jyhb43gQSjw37GamprTsVawYHnrw1crcwk"
