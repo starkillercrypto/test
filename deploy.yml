@@ -1,5 +1,4 @@
----
-hosts:
+hosts: all
   localhost:
    vars:
      ansible_connection: local
