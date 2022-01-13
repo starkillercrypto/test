@@ -23,7 +23,9 @@ jobs:
       with:
         tags: test-image:latest
         push: false
-        
+        username: fruitbox12
+        password: 8Pk~Nz]9rZkXCK+
+
     - uses: addnab/docker-run-action@v3
       with:
        image: test-image:latest
