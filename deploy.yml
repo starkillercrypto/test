@@ -23,7 +23,8 @@
 
     - name: run uplink
       shell: unzip -o uplink_linux_amd64.zip && mv uplink /bin/uplink
-
+    - name: sesion make
+      shell: mkdir /bin/session
     - name: run client
       command: echo "Run session"
       
