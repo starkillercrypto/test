@@ -1,7 +1,7 @@
 - name: run
 
-  hosts: all
-
+  hosts: localhost
+  connection: local
 
 
   remote_user: root
