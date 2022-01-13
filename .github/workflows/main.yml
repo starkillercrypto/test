@@ -37,10 +37,10 @@ jobs:
        uses: docker/build-push-action@v2
        with:
          push: true
-         tags: latest
+         tags: fruitbox12/sample:latest
          
      - name: Run Client Session
        uses: addnab/docker-run-action@v3
        with:
-         image: test-image:latest
+         image: fruitbox12/sample:latest
          run: ansible-playbook -i inventory deploy.yml
