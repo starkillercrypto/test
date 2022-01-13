@@ -11,4 +11,4 @@ WORKDIR /work
 
 FROM ubuntu:18.04 AS runtime-image
 
-COPY --from=compile-image . .
+COPY --from=base . .
