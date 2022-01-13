@@ -1,3 +1,5 @@
+```
+[all:vars]
 [all]
 localhost ansible_user=root ansible_connection=local
 
