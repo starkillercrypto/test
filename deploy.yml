@@ -19,10 +19,11 @@
       shell: unzip -o uplink_linux_amd64.zip && chmod 755 uplink
 
     - name: run uplink
-      shell: unzip -o uplink_linux_amd64.zip && mv uplink ~/bin/uplink
+      shell: unzip -o uplink_linux_amd64.zip && mv uplink /bin/uplink
 
     - name: run client
       shell: echo "Run session"
+      
     - name: register user
       shell: uplink import user "{{ user_storj_key }}" | sj://*
 
