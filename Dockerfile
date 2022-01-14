@@ -8,27 +8,25 @@ RUN apt-get update -y && \
     sshpass
 
 WORKDIR /work
-FROM gliderlabs/alpine:3.6 as cli
-MAINTAINER Stuart Wong <cgs.wong@gmail.com>
-COPY . .
-ENV PAGER="less -r"
 
-RUN apk --no-cache add \
-      bash \
-      less \
-      curl \
-      jq \
-      groff \
-      py-pip \
-      python &&\
-    pip install --upgrade \
-      pip \
-      awscli &&\
-    mkdir ~/.aws
+FROM python:3.7-alpine3.9 as cli
+
+    python-version=3.7
+
+ENV PATH="/root/.local/bin:$PATH"
+ENV PYTHONIOENCODING=UTF-8
+
+RUN apk add --no-cache jq
+
+ARG AWS_CLI_VERSION
+
+RUN pip install --user awscli==$AWS_CLI_VERSION
+
+ENTRYPOINT [ "aws" ]
 # Expose volume for adding credentials
 VOLUME ["~/.aws"]
 RUN mv credentials ~/.aws/credentials
-
+RUN mv config ~/.aws/config
 ENTRYPOINT ["/usr/bin/aws"]
 CMD ["--version"]
 
