@@ -18,8 +18,7 @@ ENV PYTHONIOENCODING=UTF-8
 RUN apk add --no-cache jq
 
 
-RUN pip install --user awscli==2.4.5
-
+RUN pip install --user awscliv2
 ENTRYPOINT [ "aws" ]
 # Expose volume for adding credentials
 VOLUME ["~/.aws"]
