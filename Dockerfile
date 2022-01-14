@@ -17,9 +17,8 @@ ENV PYTHONIOENCODING=UTF-8
 
 RUN apk add --no-cache jq
 
-ARG AWS_CLI_VERSION
 
-RUN pip install --user awscli==$AWS_CLI_VERSION
+RUN pip install --user awscli==2.4.5
 
 ENTRYPOINT [ "aws" ]
 # Expose volume for adding credentials
