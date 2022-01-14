@@ -1,0 +1,80 @@
+---  
+- hosts: localhost  
+  connection: local  
+  gather_facts: no    
+  vars:  
+    region: us-east-1
+    # prefix for naming  
+    prefix: "{{ DEPLOYMENT_ENV }}" ##(Stage, Development or Prod)
+    # availability zone
+    az: us-east-1a
+  tasks:  
+    - name: create vpc   
+      local_action:  
+        module: ec2_vpc     
+        region: "{{ region }}"
+        cidr_block: 10.0.0.0/16
+        resource_tags: '{"Name":"{{ prefix }}_vpc"}'
+        subnets:
+          - cidr: 10.0.0.0/24
+            az: "{{ az }}"
+            resource_tags: '{"Name":"{{ prefix }}_subnet_public"}'
+          - cidr: 10.0.1.0/24
+            az: "{{ az }}"
+            resource_tags: '{"Name":"{{ prefix }}_subnet_private"}'
+        internet_gateway: yes
+        route_tables:
+          - subnets:
+              - 10.0.0.0/24
+            routes:
+              - dest: 0.0.0.0/0
+                gw: igw
+      register: vpc
+    - name: write vpc id to {{ prefix }}_vpc_info file
+      sudo: yes
+      local_action: shell echo "{{ prefix }}"_vpc":" "{{ vpc.vpc_id }}" 
+                      > "{{ prefix }}"_vpc_info
+    - name: write subnets id to {{ prefix }}_vpc_info file
+      sudo: yes
+      local_action: shell echo "{{ item.resource_tags.Name }}"":" "{{ item.id }}" 
+                      >> "{{ prefix }}"_vpc_info
+      with_items: vpc.subnets
+      
+      
+    - name: launch ec2 with tags webserver "{{ DEPLOYMENT_ENV }}"  
+      ec2:
+        region: "{{ region }}"  
+        key_name: "{{ key }}"  
+        instance_type: "{{ instance_type }}"    
+        image: "{{ image }}"     
+        wait: yes    
+        group: us_webserver_east
+        instance_tags:  
+          Name: "{{ DEPLOYMENT_ENV }}"-webserver-1  
+          class: webserver  
+          environment: "{{ DEPLOYMENT_ENV }}"  
+          
+    - name: launch ec2 with tags webserver production 
+      ec2:
+        region: "{{ region }}"  
+        key_name: "{{ key }}"  
+        instance_type: "{{ instance_type }}"    
+        image: "{{ image }}"     
+        wait: yes    
+        group: us_webserver_east  
+        instance_tags:  
+          Name: production-webserver-1  
+          class: webserver  
+          environment: production
+    - name: launch ec2 with tags database staging 
+      ec2:
+        region: "{{ region }}"  
+        key_name: "{{ key }}"  
+        instance_type: "{{ instance_type }}"    
+        image: "{{ image }}"    
+        wait: yes    
+        group: us_webserver_east
+        instance_tags:  
+          Name: staging-database-1  
+          class: database  
+          environment: staging  
