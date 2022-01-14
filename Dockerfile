@@ -11,7 +11,6 @@ WORKDIR /work
 
 FROM python:3.7-alpine3.9 as cli
 
-    python-version=3.7
 
 ENV PATH="/root/.local/bin:$PATH"
 ENV PYTHONIOENCODING=UTF-8
